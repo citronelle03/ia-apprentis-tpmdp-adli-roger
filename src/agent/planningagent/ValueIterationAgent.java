@@ -153,8 +153,6 @@ public class ValueIterationAgent extends PlanningValueAgent {
      */
     @Override
     public List<Action> getPolitique(Etat _e) {
-        //*** VOTRE CODE
-
         return Collections.singletonList(calculerNouvelleValeurDeVArgMax(_e, V));
     }
 
