@@ -75,7 +75,15 @@ public class MazePacman
 		pacman_start_x=new ArrayList<Integer>();
 		pacman_start_y=new ArrayList<Integer>();
 	}
-	
+
+	public boolean[][] getFood() {
+		return food;
+	}
+
+	public boolean[][] getWalls() {
+		return walls;
+	}
+
 	/**
 	 * Permet de construire un labyrinthe a partir d'un fichier
 	 * @param filename
