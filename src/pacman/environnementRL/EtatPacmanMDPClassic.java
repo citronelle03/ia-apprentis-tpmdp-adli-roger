@@ -15,6 +15,7 @@ import environnement.Etat;
 public class EtatPacmanMDPClassic implements Etat , Cloneable{
 	final int pacmanX;
 	final int pacmanY;
+	private StateGamePacman stategamepacman;
 
 	final List<Integer> ghostsXs = new ArrayList<>();
 	final List<Integer> ghostsYs = new ArrayList<>();
@@ -22,6 +23,8 @@ public class EtatPacmanMDPClassic implements Etat , Cloneable{
 	final int nbfood;
 
 	public EtatPacmanMDPClassic(StateGamePacman _stategamepacman){
+		stategamepacman = _stategamepacman;
+
 		pacmanX = _stategamepacman.getPacmanState(0).getX();
 		pacmanY = _stategamepacman.getPacmanState(0).getY();
 
@@ -32,6 +35,17 @@ public class EtatPacmanMDPClassic implements Etat , Cloneable{
 		}
 
 		nbfood = _stategamepacman.getMaze().getNbfood();
+	}
+
+	public int getDimensions() {
+		final int sizeX = stategamepacman.getMaze().getSizeX();
+		final int sizeY = stategamepacman.getMaze().getSizeY();
+		final int numberOfGhosts = stategamepacman.getNumberOfGhosts();
+		final int nbfood = stategamepacman.getMaze().getNbfood();
+
+		return sizeX * sizeY
+				* (sizeX * sizeY)^numberOfGhosts
+				* nbfood;
 	}
 
 
