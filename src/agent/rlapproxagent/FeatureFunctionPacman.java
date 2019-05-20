@@ -46,9 +46,38 @@ public class FeatureFunctionPacman implements FeatureFunction{
 		StateAgentPacman pacmanstate_next= stategamepacman.movePacmanSimu(0, new ActionPacman(a.ordinal()));
 		 
 		//*** VOTRE CODE
-		
-		
-		
+		vfeatures[0] = 1;
+
+		final int pacmanX = pacmanstate_next.getX();
+		final int pacmanY = pacmanstate_next.getY();
+
+		final int numberOfGhosts = stategamepacman.getNumberOfGhosts();
+		int numberOfGhostsCloseToPacman = 0;
+
+		for (int g = 0; g < numberOfGhosts; g++) {
+			final StateAgentPacman ghost = stategamepacman.getGhostState(g);
+			final int ghostX = ghost.getX();
+			final int ghostY = ghost.getY();
+
+			final int distanceX = Math.abs(ghostX - pacmanX);
+			final int distanceY = Math.abs(ghostY - pacmanY);
+
+			if (distanceX == 1 || distanceY == 1) {
+				numberOfGhostsCloseToPacman++;
+			}
+		}
+
+		vfeatures[1] = numberOfGhosts;
+
+		final boolean[][] dots = stategamepacman.getMaze().getFood();
+
+		vfeatures[2] = dots[pacmanX][pacmanY] ? 1 : 0;
+
+		final int distanceToClosestDot = stategamepacman.getClosestDot(pacmanstate_next);
+		final int mapSize = stategamepacman.getMaze().getSizeX() * stategamepacman.getMaze().getSizeY();
+
+		vfeatures[3] = distanceToClosestDot / mapSize;
+
 		return vfeatures;
 	}
 

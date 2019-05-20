@@ -47,6 +47,19 @@ Pour éviter les états absorbants, il suffit que chaque autre case ait une meil
 ## Question 1:
 *Précisez et justifiez les éléments que vous avez utilisés pour la définition d’un état du MDP pour le jeu du Pacman (partie 2.2)*
 
+Nous avons utilisé les éléments suivants :
+
+* **Position X et Y du pacman** pour qu'il puisse différencier deux états identiques après un mouvement
+* **Positions X et Y des fantômes** pour qu'il puisse différencier deux états identiques après le mouvement d'un fantôme, et qu'il puisse réagir quand un fantôme approche
+* **Nombre de dots restants** pour qu'il ait un suivi de sa progression. 
 
 ## Question 2:
 *Précisez et justifiez les fonctions caractéristiques que vous avez choisies pour la classe FeatureFunctionPacman (partie 2.3).*
+
+Nous avons utilisé les fonctions caractéristiques suivantes :
+
+* Le biais
+* Le nombre de fantômes qui peuvent atteindre le pacman en un pas, afin que celui-ci puisse réagir au danger et changer de direction
+* La présence d'un dot dans la position future du pacman pour qu'il privilégie des positions qui le font progresser.
+* La distance au plus proche dot pour qu'il puisse avancer vers ses objectifs.
+

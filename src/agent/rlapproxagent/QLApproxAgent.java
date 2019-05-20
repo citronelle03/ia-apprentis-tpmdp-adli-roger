@@ -36,19 +36,11 @@ public class QLApproxAgent extends QLearningAgent {
 
     @Override
     public double getQValeur(Etat e, Action a) {
-        final long t = System.currentTimeMillis();
-
         final double[] features = featurefunction.getFeatures(e, a);
 
         int sum = 0;
         for (int i = 0; i < features.length; i++) {
             sum += poids.get(i) * features[i];
-        }
-
-        final long tt = System.currentTimeMillis();
-
-        if ((tt - t) > 1) {
-            System.out.println("getQValeur: " + (tt - t) + "ms");
         }
 
         return sum;
@@ -63,8 +55,6 @@ public class QLApproxAgent extends QLearningAgent {
         //inutile de verifier si e etat absorbant car dans runEpisode et threadepisode
         //arrete episode lq etat courant absorbant
 
-        final long t = System.currentTimeMillis();
-
         final ArrayList<Double> anciensPoids = new ArrayList<>(poids);
 
         final double qValeurSpA = getValeur(sp);
@@ -75,12 +65,6 @@ public class QLApproxAgent extends QLearningAgent {
                     + alpha * (r + gamma * qValeurSpA - qValeurSA) * featurefunction.getFeatures(s, a)[i];
 
             poids.set(i, newPoids);
-        }
-
-        final long tt = System.currentTimeMillis();
-
-        if ((tt - t) > 1) {
-            System.out.println("endStep: " + (tt - t) + "ms");
         }
     }
 
